@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import firebase from '../firebase/firebase';
 
 export default function Home() {
   return (
