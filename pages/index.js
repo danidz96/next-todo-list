@@ -4,7 +4,6 @@ import SignIn from '../components/SignIn';
 const Home = ({ user }) => (
   <div>
     Hello world!
-    {console.log(user)}
     <SignIn />
   </div>
 );
