@@ -18,7 +18,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Next.js TODO List APP</title>
       </Head>
       <AuthProvider>
         <ThemeProvider theme={theme}>
