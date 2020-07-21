@@ -1,15 +1,5 @@
-import PropTypes from 'prop-types';
-import SignIn from '../components/SignIn';
+import MainLayout from '../layouts/main';
 
-const Home = ({ user }) => (
-  <div>
-    Hello world!
-    <SignIn />
-  </div>
-);
-
-Home.propTypes = {
-  user: PropTypes.object,
-};
+const Home = () => <MainLayout />;
 
 export default Home;
