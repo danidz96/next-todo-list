@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { AuthProvider } from '../contexts/Auth';
 import theme from '../styles/materialUI/theme';
+import MainLayout from '../layouts/main';
 
 const App = ({ Component, pageProps }) => {
   useEffect(() => {
@@ -22,8 +23,10 @@ const App = ({ Component, pageProps }) => {
       </Head>
       <AuthProvider>
         <ThemeProvider theme={theme}>
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
           <CssBaseline />
-          <Component {...pageProps} />
         </ThemeProvider>
       </AuthProvider>
     </>
