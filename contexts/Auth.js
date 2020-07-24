@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import firebase from '../firebase/firebase';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext({ user: null });
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ user: currentUser }}>
       {children}
     </AuthContext.Provider>
   );
