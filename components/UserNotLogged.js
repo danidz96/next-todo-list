@@ -2,7 +2,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import Router from 'next/router';
+import { signInWithGoogle } from '../firebase/firebase';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -29,7 +29,7 @@ const UserNotLogged = () => {
         <h1 className={classes.title}>You&apos;re not logged</h1>
         <img width="100%" src="/login.svg" alt="login" />
         <Button
-          onClick={() => Router.push('/login')}
+          onClick={signInWithGoogle}
           className={classes.loginButton}
           variant="contained"
           color="primary"
