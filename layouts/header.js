@@ -7,8 +7,8 @@ import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
-import { useSession } from '../hooks/useUser';
 import UserAvatar from '../components/UserAvatar';
+import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
-  const user = useSession();
+  const [user, loading] = useAuth();
 
   return (
     <AppBar position="sticky">
@@ -38,12 +38,12 @@ const Header = () => {
             Next.js Todo List
           </Typography>
         </Link>
-        {!user ? (
+        {!user && !loading ? (
           <Button onClick={() => Router.push('/')} color="inherit">
             Login
           </Button>
         ) : (
-          <UserAvatar user={user} />
+          <UserAvatar user={user} loading={loading} />
         )}
       </Toolbar>
     </AppBar>
