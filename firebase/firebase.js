@@ -26,7 +26,7 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const logoutUser = () => {
   auth.signOut();
-  window.location = '/login';
+  // window.location = '/login';
 };
 
 export default firebase;
