@@ -1,3 +1,4 @@
+/* eslint-disable no-async-promise-executor */
 import firebase from 'firebase';
 import 'firebase/auth';
 
@@ -17,7 +18,7 @@ if (!firebase.apps.length) {
 }
 
 export const auth = firebase.auth();
-export const firestore = firebase.firestore();
+export const db = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ promp: 'select_account' });
@@ -27,6 +28,28 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 export const logoutUser = () => {
   auth.signOut();
   // window.location = '/login';
+};
+
+const getRef = ({ collection, doc }) => db.collection(collection).doc(doc);
+
+export const saveData = async ({ collection = null, data = {}, id = null }) => {
+  try {
+    const dbRef = db.collection(collection);
+    let docRef;
+    if (id) {
+      dbRef.doc(id);
+      await dbRef.doc(id).set(data);
+      docRef = getRef({ collection, doc: id });
+    } else {
+      docRef = await dbRef.add(data);
+    }
+    const doc = await docRef.get();
+    const { id: docId } = doc;
+    const docData = doc.data();
+    return { id: docId, ref: docRef, ...docData };
+  } catch (error) {
+    return error;
+  }
 };
 
 export default firebase;
