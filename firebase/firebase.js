@@ -52,4 +52,9 @@ export const saveData = async ({ collection = null, data = {}, id = null }) => {
   }
 };
 
+export const getData = async ({ collection }) => {
+  const snapshot = await db.collection(collection).get();
+  return snapshot.docs.map((doc) => doc.data());
+};
+
 export default firebase;
