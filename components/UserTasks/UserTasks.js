@@ -1,27 +1,43 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TodoInput from '../TodoInput/TodoInput';
-import { saveData } from '../../firebase/firebase';
+import TodoList from '../TodoList/TodoList';
+import { saveData, getData } from '../../firebase/firebase';
 
 const UserTasks = () => {
+  const [loadingAdd, setLoadingAdd] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [userTodos, setUserTodos] = useState([]);
+
+  const fetchTodosData = async () => {
+    setLoading(true);
+    const todos = await getData({ collection: 'todos' });
+    console.log({ todos });
+    setUserTodos(todos);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchTodosData();
+  }, []);
 
   const handleAdd = async (todo) => {
-    setLoading(true);
+    setLoadingAdd(true);
     try {
       await saveData({
         collection: 'todos',
         data: { todo },
       });
-      setLoading(false);
+      setLoadingAdd(false);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+      setLoadingAdd(false);
     }
   };
 
   return (
     <div>
-      <TodoInput onAdd={handleAdd} addLoading={loading} />
+      <TodoInput onAdd={handleAdd} addLoading={loadingAdd} />
+      <TodoList items={userTodos} />
     </div>
   );
 };
