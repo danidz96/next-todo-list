@@ -23,10 +23,12 @@ const UserTasks = () => {
   const handleAdd = async (todo) => {
     setLoadingAdd(true);
     try {
-      await saveData({
+      const todoResponse = await saveData({
         collection: 'todos',
         data: { todo },
       });
+      setUserTodos([...userTodos, todoResponse]);
+
       setLoadingAdd(false);
     } catch (error) {
       console.log(error);
