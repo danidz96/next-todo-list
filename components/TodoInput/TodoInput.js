@@ -16,7 +16,7 @@ const TodoInput = ({ addLoading, onAdd }) => {
 
   const handleAddTodo = (e) => {
     onAdd(todo);
-    onChange(e, null);
+    onChange('');
   };
 
   return (
