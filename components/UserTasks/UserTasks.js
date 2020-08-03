@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import TodoInput from '../TodoInput/TodoInput';
 import TodoList from '../TodoList/TodoList';
-import { saveData, getData } from '../../firebase/firebase';
+import { saveData, getData, deleteData } from '../../firebase/firebase';
 
 const UserTasks = () => {
   const [loadingAdd, setLoadingAdd] = useState(false);
@@ -34,10 +34,23 @@ const UserTasks = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteData({
+        collection: 'todos',
+        id,
+      });
+      const updatedUserTodos = userTodos.filter((todo) => todo.id !== id);
+      setUserTodos(updatedUserTodos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <TodoInput onAdd={handleAdd} addLoading={loadingAdd} />
-      <TodoList items={userTodos} />
+      <TodoList items={userTodos} onDelete={handleDelete} />
     </div>
   );
 };

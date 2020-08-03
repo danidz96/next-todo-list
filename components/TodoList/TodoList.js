@@ -9,7 +9,7 @@ import Input from '@material-ui/core/Input';
 import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 
-const TodoList = ({ items }) => (
+const TodoList = ({ items, onDelete }) => (
   <div>
     <List className="classes.root">
       {items.map((todo) => {
@@ -32,7 +32,11 @@ const TodoList = ({ items }) => (
             />
             <ListItemSecondaryAction>
               <Tooltip title="Delete">
-                <IconButton edge="end" aria-label="delete">
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => onDelete(todo.id)}
+                >
                   <DeleteIcon color="error" />
                 </IconButton>
               </Tooltip>
@@ -46,6 +50,7 @@ const TodoList = ({ items }) => (
 
 TodoList.propTypes = {
   items: PropTypes.array,
+  onDelete: PropTypes.func,
 };
 
 export default TodoList;

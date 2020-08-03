@@ -32,6 +32,11 @@ export const logoutUser = () => {
 
 const getRef = ({ collection, doc }) => db.collection(collection).doc(doc);
 
+export const getData = async ({ collection }) => {
+  const snapshot = await db.collection(collection).get();
+  return snapshot.docs.map((doc) => ({ id: doc.ref.id, ...doc.data() }));
+};
+
 export const saveData = async ({ collection = null, data = {}, id = null }) => {
   try {
     const dbRef = db.collection(collection);
@@ -52,9 +57,14 @@ export const saveData = async ({ collection = null, data = {}, id = null }) => {
   }
 };
 
-export const getData = async ({ collection }) => {
-  const snapshot = await db.collection(collection).get();
-  return snapshot.docs.map((doc) => ({ id: doc.ref.id, ...doc.data() }));
+export const deleteData = async ({ collection = null, id = null }) => {
+  try {
+    const dbRef = db.collection(collection).doc(id);
+    await dbRef.delete();
+    return true;
+  } catch (error) {
+    return error;
+  }
 };
 
 export default firebase;
