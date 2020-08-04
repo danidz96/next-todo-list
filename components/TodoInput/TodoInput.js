@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -21,14 +20,13 @@ const TodoInput = ({ addLoading, onAdd }) => {
 
   return (
     <FormControl fullWidth>
-      <InputLabel htmlFor="todo-input">
-        Type here to add a new task...
-      </InputLabel>
       <Input
         id="todo-input"
         onChange={onChange}
         onKeyPress={(event) => event.key === 'Enter' && handleAddTodo()}
         value={todo}
+        className={classes.inputTodo}
+        placeholder="Type here to add a new task..."
         endAdornment={
           <InputAdornment position="end">
             <Tooltip title="Send Todo">

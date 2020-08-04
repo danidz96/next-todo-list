@@ -7,4 +7,8 @@ export const useStyles = makeStyles((theme) => ({
     left: 0,
     zIndex: 1,
   },
+  inputTodo: {
+    padding: 20,
+    width: '100%',
+  },
 }));

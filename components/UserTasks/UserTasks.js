@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import { Box } from '@material-ui/core';
 import TodoInput from '../TodoInput/TodoInput';
 import TodoList from '../TodoList/TodoList';
 import { saveData, getData, deleteData } from '../../firebase/firebase';
+import { useStyles } from './styles';
 
 const UserTasks = () => {
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userTodos, setUserTodos] = useState([]);
+
+  const classes = useStyles();
 
   const fetchTodosData = async () => {
     setLoading(true);
@@ -50,10 +54,14 @@ const UserTasks = () => {
   };
 
   return (
-    <div>
+    <Box
+      className={classes.userTasksContainer}
+      boxShadow={2}
+      borderRadius="5px"
+    >
       <TodoInput onAdd={handleAdd} addLoading={loadingAdd} />
       <TodoList items={userTodos} onDelete={handleDelete} />
-    </div>
+    </Box>
   );
 };
 

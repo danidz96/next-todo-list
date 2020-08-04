@@ -8,6 +8,7 @@ const Page = ({ children }) => (
       {`
         .main {
           min-height: 100vh;
+          margin-top: 60px;
         }
       `}
     </style>
