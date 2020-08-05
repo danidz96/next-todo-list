@@ -1,14 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-  addProgress: {
-    position: 'absolute',
-    top: 3,
-    left: 0,
-    zIndex: 1,
-  },
-  inputTodo: {
-    padding: '20px',
+  todoListItem: {
+    padding: '10px 0',
     width: '100%',
+    '&:before': {
+      borderBottom: '0px',
+    },
   },
 }));
