@@ -10,7 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import { useStyles } from './styles';
 
-const TodoList = ({ items, onDelete }) => {
+const TodoList = ({ items, onDelete, onToggleComplete }) => {
   const classes = useStyles();
   return (
     <div>
@@ -25,6 +25,7 @@ const TodoList = ({ items, onDelete }) => {
                   checked={todo.completed}
                   tabIndex={-1}
                   inputProps={{ 'aria-labelledby': labelId }}
+                  onClick={() => onToggleComplete(todo.id)}
                 />
               </ListItemIcon>
               <Input
@@ -56,6 +57,7 @@ const TodoList = ({ items, onDelete }) => {
 TodoList.propTypes = {
   items: PropTypes.array,
   onDelete: PropTypes.func,
+  onToggleComplete: PropTypes.func,
 };
 
 export default TodoList;

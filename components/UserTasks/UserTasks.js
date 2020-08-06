@@ -53,6 +53,28 @@ const UserTasks = () => {
     }
   };
 
+  const handleToggleComplete = async (id) => {
+    const updatedUserTodos = userTodos.map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+    setUserTodos(updatedUserTodos);
+    const selectedTodo = userTodos.find((todo) => todo.id === id);
+    try {
+      await saveData({
+        collection: 'todos',
+        data: { ...selectedTodo, completed: !selectedTodo.completed },
+        id,
+      });
+
+      setLoadingAdd(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Box
       className={classes.userTasksContainer}
@@ -60,7 +82,11 @@ const UserTasks = () => {
       borderRadius="5px"
     >
       <TodoInput onAdd={handleAdd} addLoading={loadingAdd} />
-      <TodoList items={userTodos} onDelete={handleDelete} />
+      <TodoList
+        items={userTodos}
+        onDelete={handleDelete}
+        onToggleComplete={handleToggleComplete}
+      />
     </Box>
   );
 };
