@@ -26,6 +26,7 @@ module.exports = {
     'no-debugger': 0,
     'no-alert': 0,
     'no-unused-vars': 1,
+    'no-nested-ternary': 0,
     'prefer-const': [
       'error',
       {

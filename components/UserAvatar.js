@@ -6,7 +6,6 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import ContentLoader from 'react-content-loader';
 import { makeStyles } from '@material-ui/core';
 import { logoutUser } from '../firebase/firebase';
-import { useAuth } from '../hooks/useAuth';
 
 const useStyles = makeStyles(() => ({
   displayName: {
