@@ -15,7 +15,6 @@ const UserTasks = () => {
   const fetchTodosData = async () => {
     setLoading(true);
     const todos = await getData({ collection: 'todos' });
-    console.log({ todos });
     setUserTodos(todos);
     setLoading(false);
   };

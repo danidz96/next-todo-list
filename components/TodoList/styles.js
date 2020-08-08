@@ -8,4 +8,7 @@ export const useStyles = makeStyles((theme) => ({
       borderBottom: '0px',
     },
   },
+  todoCompleted: {
+    textDecoration: 'line-through',
+  },
 }));

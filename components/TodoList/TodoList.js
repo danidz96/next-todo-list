@@ -33,7 +33,10 @@ const TodoList = ({ items, onDelete, onToggleComplete }) => {
                 value={todo.todo}
                 placeholder="Edit todo item.."
                 inputProps={{ 'aria-label': 'description' }}
-                className={classes.todoListItem}
+                className={[
+                  classes.todoListItem,
+                  todo.completed && classes.todoCompleted,
+                ]}
               />
               <ListItemSecondaryAction>
                 <Tooltip title="Delete">
