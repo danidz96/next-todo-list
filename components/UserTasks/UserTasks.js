@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Box } from '@material-ui/core';
 import TodoInput from '../TodoInput/TodoInput';
 import TodoList from '../TodoList/TodoList';
@@ -74,6 +74,11 @@ const UserTasks = () => {
     }
   };
 
+  const getCompletedTodoCount = useCallback(
+    () => userTodos.filter((todo) => todo.completed === true).length,
+    [userTodos]
+  );
+
   return (
     <Box
       className={classes.userTasksContainer}
@@ -86,6 +91,14 @@ const UserTasks = () => {
         onDelete={handleDelete}
         onToggleComplete={handleToggleComplete}
       />
+      <Box className={classes.footer}>
+        <p className={classes.totalItemsText}>
+          Total tasks: {userTodos.length}
+        </p>
+        <p className={classes.totalItemsText}>
+          Completed tasks: {getCompletedTodoCount()}
+        </p>
+      </Box>
     </Box>
   );
 };
